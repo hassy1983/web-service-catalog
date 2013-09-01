@@ -71,8 +71,12 @@ function aq_resize( $url, $width, $height = null, $crop = null, $single = true )
 			} 
 			//else resize and return the new resized image url
 			else {
-				$resized_img_path = image_resize( $img_path, $width, $height, $crop );
-				$resized_rel_path = str_replace( $upload_dir, '', $resized_img_path);
+				$image = wp_get_image_editor($img_path);
+				if (!is_wp_error($image)) {
+				    $image->resize($width, $height, $crop);
+				    $image->save($img_path);
+				}
+				$resized_rel_path = str_replace( $upload_dir, '', $img_path);
 				$img_url = $upload_url . $resized_rel_path;
 			}
 
@@ -85,8 +89,12 @@ function aq_resize( $url, $width, $height = null, $crop = null, $single = true )
 	} 
 	//else, we resize the image and return the new resized image url
 	else {
-		$resized_img_path = image_resize( $img_path, $width, $height, $crop );
-		$resized_rel_path = str_replace( $upload_dir, '', $resized_img_path);
+	    $image = wp_get_image_editor($img_path);
+		if (!is_wp_error($image)) {
+		    $image->resize($width, $height, $crop);
+		    $image->save($img_path);
+		}
+		$resized_rel_path = str_replace( $upload_dir, '', $img_path);
 		$img_url = $upload_url . $resized_rel_path;
 	}
 
