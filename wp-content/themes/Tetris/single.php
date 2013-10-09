@@ -140,11 +140,9 @@ elseif ( get_post_format() == 'audio' ){
 		// Image With Lightbox
 		elseif( get_post_format() == 'image' ){ ?>
         	<div id="post-thumbnail"><a href="<?php echo wp_get_attachment_url( get_post_thumbnail_id(), 'full' )?>" tile="<?php _e('View Full-Size','wpex'); ?>" class="prettyphoto-link"><img src="<?php echo aq_resize( wp_get_attachment_url( get_post_thumbnail_id(), 'full' ),  wpex_img( 'blog_width' ), wpex_img( 'blog_height' ), wpex_img( 'blog_crop' ) ); ?>" alt="<?php echo the_title(); ?>" /></a></div>
-        <?php } else {
-            if( has_post_thumbnail() ) { ?>
-            <div id="post-thumbnail"><img src="<?php echo aq_resize( wp_get_attachment_url( get_post_thumbnail_id(), 'full' ),  wpex_img( 'blog_width' ), wpex_img( 'blog_height' ), wpex_img( 'blog_crop' ) ); ?>" alt="<?php echo the_title(); ?>" /></div>
-        <?php }
-        } ?>
+        <?php } else {?>
+            <div id="post-thumbnail"><img src="<?php echo aq_resize( the_field("header_img", $post->ID),  wpex_img( 'blog_width' ), wpex_img( 'blog_height' ), wpex_img( 'blog_crop' ) ); ?>" alt="<?php echo the_title(); ?>" /></div>
+        <?php } ?>
 
 <div id="single-post-content" class="sidebar-bg container clearfix">
     
